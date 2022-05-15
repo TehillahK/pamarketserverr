@@ -1,7 +1,7 @@
 # Pa Market backend code starter
 #  written by Tehillah Kangamba
 # all database stuff is famerpersitance package
-from FarmsSingleton import FarmsSingleton
+from farmlogic import FarmsSingleton
 
 from flask import Flask, request, render_template, abort
 
