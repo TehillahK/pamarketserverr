@@ -1,5 +1,10 @@
 # Pa Market Server
 This the backend server for pamarket and rest api server .
+## Architecture
+
+1. ### Persistence layer
+2. ### Business layer
+3. ###  Data layer
 
 ## Routes
 
