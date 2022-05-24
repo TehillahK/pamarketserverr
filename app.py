@@ -1,9 +1,11 @@
 # Pa Market backend code starter
 #  written by Tehillah Kangamba
 # all database stuff is famerpersitance package
+from flask_restful.utils import cors
+
 from farmlogic import FarmsSingleton
 
-from flask import Flask, request, render_template, abort
+from flask import Flask, request, render_template, abort, jsonify
 
 from flask_restful import Resource, Api
 
@@ -13,6 +15,7 @@ api = Api(app)
 
 # used to get a farm , add a farm and remove one
 class Farm(Resource):
+    @cors.crossdomain(origin='*')
     def get(self):
         result = None
         args = request.args
@@ -30,6 +33,7 @@ class Farm(Resource):
 
 
 class Crops(Resource):
+    @cors.crossdomain(origin='*')
     def get(self):
         args = request.args
         args = args.to_dict()
@@ -47,16 +51,19 @@ class Crops(Resource):
 
 #  Used to get all farms
 class Farms(Resource):
-
+    @cors.crossdomain(origin='*')
     def get(self):
+        result = None
         db = FarmsSingleton("te", "hill")
-        farms = db.get_all_farms()
-        return farms
+        result = db.get_all_farms()
+        print(result)
+        result = jsonify(result)
+        return result
 
 
 @app.route('/farm')
 def farm_page():
-    return  render_template("farm.html")
+    return render_template("farm.html")
 
 
 @app.route('/')
@@ -64,8 +71,9 @@ def hello_world():  # put application's code here
     return render_template("index.html")
 
 
-api.add_resource(Farm, "/api/farm")
 api.add_resource(Farms, "/api/farms")
+api.add_resource(Farm, "/api/farm")
+
 api.add_resource(Crops, "/api/crops")
 if __name__ == '__main__':
     # initiliaze database
