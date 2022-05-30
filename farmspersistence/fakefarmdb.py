@@ -3,17 +3,17 @@ from farmspersistence.farmdatabase import FarmDatabase
 farms = {
     "farms": [
         {
-            "_id": "1",
+            "_id": "0",
             "name": "Grace Farms",
             "type": ["Vegetables"]
         },
         {
-            "_id": "2",
+            "_id": "1",
             "name": "Mary Farms",
             "type": ["meatProducts"]
         },
         {
-            "_id": "3",
+            "_id": "2",
             "name": "Jerry Farms",
             "type": ["Vegetables", "Meat", "Meat Products"]
         }
@@ -23,7 +23,7 @@ farms = {
 crops = {
     "crops": [
         {
-            "_id": "1",
+            "_id": "0",
             "produce": [
                 {
                     "name": "onion",
@@ -40,7 +40,7 @@ crops = {
             ]
         },
         {
-            "_id": "2",
+            "_id": "1",
             "produce": [
                 {
                     "name": "milk",
@@ -58,7 +58,7 @@ crops = {
 
         },
         {
-            "_id": "3",
+            "_id": "2",
             "produce": [
                 {
                     "name": "Pork",
@@ -84,18 +84,13 @@ class FakeFarmDB(FarmDatabase):
 
     def get_farm(self, farm_id):
         result = None
-        for farm in farms["farms"]:
-            if farm["_id"] is farm_id:
-                result = farm
+        result=farms["farms"][farm_id]
+
         return result
 
     def get_farm_crops(self, farm_id):
         result = None
-
-        for crop in crops["crops"]:
-            if crop["_id"] is farm_id:
-                result = crop
-
+        result = crops["crops"][farm_id]
         return result
 
     def connect_db(self):
