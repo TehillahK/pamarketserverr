@@ -46,6 +46,8 @@ class Crops(Resource):
             result = crops
         else:
             abort(400, "invalid request made to farms")
+
+        print(result)
         return result
 
 

@@ -26,12 +26,14 @@ crops = {
             "_id": "0",
             "produce": [
                 {
+                    "_id": 0,
                     "name": "onion",
                     "price": "k2",  ## price per kg
                     "priceType": "kg",
                     "available": True
                 },
                 {
+                    "_id":1,
                     "name": "potatoes",
                     "price": "k2",
                     "priceType": "kg",
@@ -43,12 +45,14 @@ crops = {
             "_id": "1",
             "produce": [
                 {
+                    "_id":0,
                     "name": "milk",
                     "price": "k10",
                     "priceType": "quantity",
                     "available": True
                 },
                 {
+                    "_id":1,
                     "name": "cheese",
                     "price": "k10",
                     "priceType": "quantity",
@@ -61,12 +65,14 @@ crops = {
             "_id": "2",
             "produce": [
                 {
+                    "_id": 0,
                     "name": "Pork",
                     "price": "k10",
                     "priceType": "kg",
                     "available": True
                 },
                 {
+                    "_id":1,
                     "name": "Beef",
                     "price": "k10",
                     "priceType": "kg",
@@ -90,7 +96,7 @@ class FakeFarmDB(FarmDatabase):
 
     def get_farm_crops(self, farm_id):
         result = None
-        result = crops["crops"][farm_id]
+        result = crops["crops"][int(farm_id)]
         return result
 
     def connect_db(self):
