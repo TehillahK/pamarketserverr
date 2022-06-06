@@ -3,6 +3,9 @@ from farmspersistence.fakefarmdb import FakeFarmDB
 
 
 ## From stack overflow
+from farmspersistence.farmmongodb import FarmMongoDB
+
+
 class FarmsSingleton:
     __instance = None
 
@@ -14,7 +17,7 @@ class FarmsSingleton:
     def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
-        db = FakeFarmDB()
+        db = FarmMongoDB()
         self.db_interface = FarmsPersistence(db)
 
     def get_all_farms(self):

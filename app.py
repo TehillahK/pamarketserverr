@@ -59,7 +59,7 @@ class Farms(Resource):
         db = FarmsSingleton("te", "hill")
         result = db.get_all_farms()
         print(result)
-        result = jsonify(result)
+       # result = jsonify(result)
         return result
 
 
