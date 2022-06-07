@@ -8,14 +8,23 @@ from farmlogic import FarmsSingleton
 from flask import Flask, request, render_template, abort, jsonify
 
 from flask_restful import Resource, Api
-
+from flask_caching import Cache
+config = {
+    "DEBUG": True,          # some Flask specific configs
+    "CACHE_TYPE": "SimpleCache",  # Flask-Caching related configs
+    "CACHE_DEFAULT_TIMEOUT": 300
+}
 app = Flask(__name__)
+# tell Flask to use the above defined config
+app.config.from_mapping(config)
+cache = Cache(app)
 api = Api(app)
 
 
 # used to get a farm , add a farm and remove one
 class Farm(Resource):
     @cors.crossdomain(origin='*')
+    @cache.memoize(50)
     def get(self):
         result = None
         args = request.args
@@ -54,12 +63,13 @@ class Crops(Resource):
 #  Used to get all farms
 class Farms(Resource):
     @cors.crossdomain(origin='*')
+    @cache.cached(timeout=60)
     def get(self):
         result = None
         db = FarmsSingleton("te", "hill")
         result = db.get_all_farms()
         print(result)
-       # result = jsonify(result)
+        # result = jsonify(result)
         return result
 
 
@@ -80,4 +90,4 @@ api.add_resource(Crops, "/api/crops")
 if __name__ == '__main__':
     # initiliaze database
 
-    app.run()
+    app.run(threaded=True)
