@@ -29,8 +29,8 @@ class FarmMongoDB(FarmDatabase):
             print("failed to connect")
 
     def get_all_farms(self):
-        my_client = pymongo.MongoClient("mongodb://localhost:27017/")
-        mydb = my_client["pamarketfarms"]
+        my_client = pymongo.MongoClient("mongodb+srv://doadmin:12p043lA9fa67PYc@pa-market-db-044f19b3.mongo.ondigitalocean.com/farms?tls=true&authSource=admin&replicaSet=pa-market-db")
+        mydb = my_client["farms"]
         # self.collection = mydb[self.collection_name]
         result = list(mydb["lusaka"].find())
         result = dumps(result)
@@ -39,8 +39,8 @@ class FarmMongoDB(FarmDatabase):
     def get_farm(self, farm_id, city="lusaka"):
         farm_id = ObjectId(farm_id)
         my_query = {"_id": farm_id}
-        my_client = pymongo.MongoClient("mongodb://localhost:27017/")
-        mydb = my_client["pamarketfarms"]
+        my_client = pymongo.MongoClient("mongodb+srv://doadmin:12p043lA9fa67PYc@pa-market-db-044f19b3.mongo.ondigitalocean.com/farms?tls=true&authSource=admin&replicaSet=pa-market-db")
+        mydb = my_client["farms"]
         col = mydb[city]
         farm = col.find(my_query)
         result = dumps(farm[0])
