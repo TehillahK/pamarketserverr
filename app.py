@@ -90,4 +90,4 @@ api.add_resource(Crops, "/api/crops")
 if __name__ == '__main__':
     # initiliaze database
 
-    app.run(host='0.0.0.0',threaded=True)
+    app.run(host='0.0.0.0',port=8080,threaded=True)
