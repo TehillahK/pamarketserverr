@@ -3,14 +3,19 @@ import pymongo
 from farmspersistence.farmdatabase import FarmDatabase
 from bson.json_util import dumps
 from bson.objectid import ObjectId
+from dotenv import load_dotenv
+import os
 
 
 class FarmMongoDB(FarmDatabase):
 
     def __int__(self):
-        self.url = "mongodb://localhost:27017/"
+
+        load_dotenv()
+        my_id = os.getenv("MONGO_URL")
+        self.url = my_id
         self.db = None
-        self.database_name = "pamarketfarms"
+        self.database_name = "farms"
         self.collection_name = "lusaka"
         self.collection = None
 
