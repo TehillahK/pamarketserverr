@@ -1,11 +1,7 @@
 import pymongo
-
-from farmspersistence.farmdatabase import FarmDatabase
 from bson.json_util import dumps
-from bson.objectid import ObjectId
 from dotenv import load_dotenv
 import os
-
 from farmspersistence.userdatabase import UserDatabase
 
 load_dotenv()
