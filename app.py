@@ -110,7 +110,6 @@ class Farms(Resource):
         result = None
         db = FarmsSingleton("te", "hill")
         result = db.get_all_farms()
-        print(result)
         # result = jsonify(result)
         return result
 
@@ -125,11 +124,11 @@ def hello_world():  # put application's code here
     return render_template("index.html")
 
 
+api.add_resource(Users, "/api/users")
 api.add_resource(Farms, "/api/farms")
 api.add_resource(Farm, "/api/farm")
 
 api.add_resource(Crops, "/api/crops")
-api.add_resource(Users, "/api/users")
 if __name__ == '__main__':
     # initiliaze database
 
