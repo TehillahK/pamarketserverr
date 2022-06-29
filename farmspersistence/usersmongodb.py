@@ -16,7 +16,7 @@ class UsersMongoDB(UserDatabase):
             my_client = pymongo.MongoClient(url)
             mydb = my_client["users"]
             col = mydb["customers"]
-            user = col.find(my_query)
+            user = col.find(my_query).limit(1)
             result = dumps(user[0])
         except pymongo.errors.ConnectionFailure:
             print("failed to get user")

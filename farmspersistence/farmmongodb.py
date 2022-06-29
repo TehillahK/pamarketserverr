@@ -40,7 +40,7 @@ class FarmMongoDB(FarmDatabase):
         my_client = pymongo.MongoClient(url)
         mydb = my_client["farms"]
         col = mydb[city]
-        farm = col.find(my_query)
+        farm = col.find(my_query).limit(1)
         result = dumps(farm[0])
         return result
 
