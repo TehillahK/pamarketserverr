@@ -39,6 +39,7 @@ class Users(Resource):
             db = UsersSingleton()
             email = args["email"]
             user = db.get_user(email)
+            user["message"] = "sucess"
             if user is None:
                 abort(404, "could not find user in database")
             result = user
@@ -54,6 +55,7 @@ class Users(Resource):
             db = UsersSingleton()
             email = data["email"]
             user = db.get_user(email)
+
             if user is None:
                 abort(404, "could not find user in database")
             result = user

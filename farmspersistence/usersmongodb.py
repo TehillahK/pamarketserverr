@@ -1,3 +1,5 @@
+import json
+
 import pymongo
 from bson.json_util import dumps
 from dotenv import load_dotenv
@@ -18,6 +20,9 @@ class UsersMongoDB(UserDatabase):
             col = mydb["customers"]
             user = col.find(my_query).limit(1)
             result = dumps(user[0])
+            result = json.loads(result)
+            result["message"]="success"
+            result = json.dumps(result)
         except pymongo.errors.ConnectionFailure:
             print("failed to get user")
             result = None
