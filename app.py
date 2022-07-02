@@ -52,16 +52,24 @@ class Users(Resource):
     def post(self):
         data = request.json
         try:
-            db = UsersSingleton()
-            email = data["email"]
-            user = db.get_user(email)
+            if len(data) == 1:
+                db = UsersSingleton()
+                email = data["email"]
+                user = db.get_user(email)
 
-            if user is None:
-                abort(404, "could not find user in database")
-            result = user
+                if user is None:
+                    abort(404, "could not find user in database")
+                result = user
+            else:
+                db = UsersSingleton()
+                result = db.add_user(email=data["email"], house_num=data["houseNum"]
+                                     , street_name=data["streetName"], area=data["area"], city=data["city"],
+                                     province=data["province"], x_coordinate=data["coordinates"][0],
+                                     y_coordinate=data["coordinates"][1]
+                                     )
         except json.decoder.JSONDecodeError:
             print("failed")
-
+            abort(404, "could not find user in database")
         return result
 
 

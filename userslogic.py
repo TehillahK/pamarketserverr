@@ -16,3 +16,6 @@ class UsersSingleton:
 
     def get_user(self,email):
         return self.db_interface.get_user(email)
+
+    def add_user(self, email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0):
+        return self.db_interface.add_user(email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0)

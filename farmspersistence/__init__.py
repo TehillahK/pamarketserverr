@@ -23,3 +23,6 @@ class UsersPersistence:
 
     def get_user(self, email):
         return self._db.get_user(email)
+
+    def add_user(self, email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0):
+        return self._db.add_user( email, house_num, street_name, area, city, province, x_coordinate,y_coordinate)

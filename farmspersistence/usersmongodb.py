@@ -12,6 +12,22 @@ url = os.getenv("MONGO_URL")
 
 class UsersMongoDB(UserDatabase):
 
+    def delete_user(self, email):
+        try:
+            my_client = pymongo.MongoClient(url)
+            mydb = my_client["users"]
+            my_col = mydb["customers"]
+            myquery = {"email": email}
+            my_col.delete_one(myquery)
+        except pymongo.errors.ConnectionFailure:
+            print("failed to get user")
+            result = None
+        except Exception as e:
+            result = None
+            print("failed")
+            print(e)
+        return result
+
     def get_user(self, email):
         try:
             my_query = {"email": email}
@@ -33,5 +49,32 @@ class UsersMongoDB(UserDatabase):
             print(e)
         return result
 
-    def add_user(self):
-        pass
+    def add_user(self, email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0):
+        try:
+            my_client = pymongo.MongoClient(url)
+            mydb = my_client["users"]
+            col = mydb["customers"]
+            mydict = {"email": email,
+                      "address":
+                          [
+                            {
+                             "houseNum": house_num,
+                              "streetName": street_name,
+                              "area": area,
+                              "city": city,
+                              "province": province,
+                              "coordinates": [],
+                            }
+                          ]
+                      }
+            col.insert_one(mydict)
+            result = {"success": True}
+            result = json.dumps(result)
+        except pymongo.errors.ConnectionFailure:
+            print("failed to get user")
+            result = None
+        except Exception as e:
+            result = None
+            print("failed")
+            print(e)
+        return result
