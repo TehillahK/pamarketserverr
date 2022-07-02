@@ -51,6 +51,7 @@ class Users(Resource):
     @cache.memoize(50)
     def post(self):
         data = request.json
+        print(data)
         try:
             if len(data) == 1:
                 db = UsersSingleton()
