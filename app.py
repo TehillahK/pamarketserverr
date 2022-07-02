@@ -50,7 +50,7 @@ class Users(Resource):
     @cors.crossdomain(origin='*')
     @cache.memoize(50)
     def post(self):
-        data = request.json
+        data = request.get_json(force=True)
         print(data)
         try:
             if len(data) == 1:
