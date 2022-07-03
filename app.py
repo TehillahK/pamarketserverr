@@ -33,18 +33,11 @@ class Users(Resource):
     @cache.memoize(50)
     def get(self):
         result = None
-        args = request.args
-        args = args.to_dict()
-        if len(args) == 1 and "id" in args.keys():
-            db = UsersSingleton()
-            email = args["email"]
-            user = db.get_user(email)
-            user["message"] = "sucess"
-            if user is None:
-                abort(404, "could not find user in database")
-            result = user
-        else:
-            abort(400, "invalid request made to farms")
+        db = UsersSingleton()
+        users = db.get_all_users()
+        if users is None:
+            abort(404, "could not find users in database")
+        result = users
         return result
 
     @cors.crossdomain(origin='*')

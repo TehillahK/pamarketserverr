@@ -26,3 +26,6 @@ class UsersPersistence:
 
     def add_user(self, email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0):
         return self._db.add_user( email, house_num, street_name, area, city, province, x_coordinate,y_coordinate)
+
+    def get_all_users(self):
+        return self._db.get_all_users()

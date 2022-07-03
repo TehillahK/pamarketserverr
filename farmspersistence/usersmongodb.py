@@ -12,6 +12,15 @@ url = os.getenv("MONGO_URL")
 
 class UsersMongoDB(UserDatabase):
 
+    def get_all_users(self):
+        my_client = pymongo.MongoClient(url)
+        mydb = my_client["users"]
+        my_col = mydb["customers"]
+        result = list(my_col.find())
+        result = dumps(result)
+        #print(result)
+        return result
+
     def delete_user(self, email):
         try:
             my_client = pymongo.MongoClient(url)
