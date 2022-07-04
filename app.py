@@ -5,14 +5,14 @@ import json
 
 from flask_restful.utils import cors
 
-from farmlogic import FarmsSingleton
+from logic.farmlogic import FarmsSingleton
 
-from flask import Flask, request, render_template, abort, jsonify
+from flask import Flask, request, render_template, abort
 
 from flask_restful import Resource, Api, reqparse
 from flask_caching import Cache
 
-from userslogic import UsersSingleton
+from logic.userslogic import UsersSingleton
 
 config = {
     "DEBUG": True,  # some Flask specific configs
