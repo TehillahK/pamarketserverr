@@ -12,13 +12,30 @@ url = os.getenv("MONGO_URL")
 
 class UsersMongoDB(UserDatabase):
 
+    def update_user(self, query, updated_vals):
+        result = None
+        try:
+            my_client = pymongo.MongoClient(url)
+            mydb = my_client["users"]
+            my_col = mydb["customers"]
+            new_values = {"$set": updated_vals}
+            my_col.update_one(query, new_values)
+            # print(dumps(result))
+            result = json.dumps({"message": "user updated"})
+        except Exception as e:
+            result = None
+            print("failed")
+            print(e)
+        return result
+
     def get_all_users(self):
         my_client = pymongo.MongoClient(url)
         mydb = my_client["users"]
         my_col = mydb["customers"]
         result = list(my_col.find())
         result = dumps(result)
-        #print(result)
+        # print(result)
+        my_client.close()
         return result
 
     def delete_user(self, email):
@@ -28,6 +45,7 @@ class UsersMongoDB(UserDatabase):
             my_col = mydb["customers"]
             myquery = {"email": email}
             my_col.delete_one(myquery)
+            my_client.close()
         except pymongo.errors.ConnectionFailure:
             print("failed to get user")
             result = None
@@ -66,14 +84,14 @@ class UsersMongoDB(UserDatabase):
             mydict = {"email": email,
                       "address":
                           [
-                            {
-                             "houseNum": house_num,
-                              "streetName": street_name,
-                              "area": area,
-                              "city": city,
-                              "province": province,
-                              "coordinates": [],
-                            }
+                              {
+                                  "houseNum": house_num,
+                                  "streetName": street_name,
+                                  "area": area,
+                                  "city": city,
+                                  "province": province,
+                                  "coordinates": [],
+                              }
                           ]
                       }
             col.insert_one(mydict)

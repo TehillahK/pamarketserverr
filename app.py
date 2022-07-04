@@ -46,9 +46,10 @@ class Users(Resource):
         data = request.get_json(force=True)
         print(data)
         try:
+            email = data["email"]
             if len(data) == 1:
                 db = UsersSingleton()
-                email = data["email"]
+
                 user = db.get_user(email)
 
                 if user is None:
@@ -56,11 +57,8 @@ class Users(Resource):
                 result = user
             else:
                 db = UsersSingleton()
-                result = db.add_user(email=data["email"], house_num=data["houseNum"]
-                                     , street_name=data["streetName"], area=data["area"], city=data["city"],
-                                     province=data["province"], x_coordinate=data["coordinates"][0],
-                                     y_coordinate=data["coordinates"][1]
-                                     )
+                query={"email":email}
+                result = db.update_user(query,data)
         except json.decoder.JSONDecodeError:
             print("failed")
             abort(404, "could not find user in database")

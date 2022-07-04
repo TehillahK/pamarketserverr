@@ -29,3 +29,6 @@ class UsersPersistence:
 
     def get_all_users(self):
         return self._db.get_all_users()
+
+    def update_user(self,query,updated_vals):
+        return self._db.update_user(query,updated_vals)

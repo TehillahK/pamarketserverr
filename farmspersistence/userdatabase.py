@@ -7,6 +7,10 @@ class UserDatabase(ABC):
         pass
 
     @abstractmethod
+    def update_user(self,query,updated_vals):
+        pass
+
+    @abstractmethod
     def add_user(self, email, house_num, street_name, area, city, province, x_coordinate=0, y_coordinate=0):
         pass
 
