@@ -13,6 +13,7 @@ from flask_restful import Resource, Api, reqparse
 from flask_caching import Cache
 
 from logic.userslogic import UsersSingleton
+from flask_cors import CORS
 
 config = {
     "DEBUG": True,  # some Flask specific configs
@@ -20,6 +21,7 @@ config = {
     "CACHE_DEFAULT_TIMEOUT": 300
 }
 app = Flask(__name__)
+CORS(app)
 # tell Flask to use the above defined config
 app.config.from_mapping(config)
 cache = Cache(app)
