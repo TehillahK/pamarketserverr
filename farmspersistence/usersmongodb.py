@@ -35,7 +35,7 @@ class UsersMongoDB(UserDatabase):
         result = list(my_col.find())
         result = dumps(result)
         # print(result)
-        my_client.close()
+     #   my_client.close()
         return result
 
     def delete_user(self, email):
@@ -45,7 +45,7 @@ class UsersMongoDB(UserDatabase):
             my_col = mydb["customers"]
             myquery = {"email": email}
             my_col.delete_one(myquery)
-            my_client.close()
+         #   my_client.close()
         except pymongo.errors.ConnectionFailure:
             print("failed to get user")
             result = None
@@ -66,7 +66,7 @@ class UsersMongoDB(UserDatabase):
             result = json.loads(result)
             result["message"] = "success"
             result = json.dumps(result)
-            my_client.close()
+       #     my_client.close()
         except pymongo.errors.ConnectionFailure:
             print("failed to get user")
             result = None

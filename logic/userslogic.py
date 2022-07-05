@@ -1,5 +1,6 @@
-import json
-
+# Pa Market backend code starter
+#  written by Tehillah Kangamba
+# all database stuff is famerpersitance package
 from farmspersistence import UsersPersistence
 from farmspersistence.usersmongodb import UsersMongoDB
 

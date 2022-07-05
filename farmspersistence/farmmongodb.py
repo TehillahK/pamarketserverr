@@ -23,6 +23,7 @@ class FarmMongoDB(FarmDatabase):
             mydb = my_client[self.database_name]
             # self.collection = mydb[self.collection_name]
             mydb[self.collection_name]
+          #  my_client.close()
         except Exception as e:
             print("failed to connect")
 
@@ -32,6 +33,7 @@ class FarmMongoDB(FarmDatabase):
         # self.collection = mydb[self.collection_name]
         result = list(mydb["lusaka"].find())
         result = dumps(result)
+       # my_client.close()
         return result
 
     def get_farm(self, farm_id, city="lusaka"):
@@ -42,6 +44,7 @@ class FarmMongoDB(FarmDatabase):
         col = mydb[city]
         farm = col.find(my_query).limit(1)
         result = dumps(farm[0])
+        #my_client.close()
         return result
 
     def get_farm_crops(self, farm_id):
