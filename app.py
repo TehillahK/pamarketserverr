@@ -60,6 +60,8 @@ class Users(Resource):
                 db = UsersSingleton()
                 query={"email":email}
                 result = db.update_user(query,data)
+                if result is None:
+                    abort(404,"failed to update user")
         except json.decoder.JSONDecodeError:
             print("failed")
             abort(404, "could not find user in database")
