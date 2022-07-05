@@ -41,7 +41,6 @@ class Users(Resource):
         return result
 
     @cors.crossdomain(origin='*')
-    @cache.memoize(50)
     def post(self):
         data = request.get_json(force=True)
         print(data)
